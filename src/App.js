@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+//componentes
+import React from "react";
+import { Header } from "./components/Header";
+import { Products } from "./components/Products";
+import {Routes, Route, BrowserRouter as Router} from "react-router-dom";
+import { NuevoProducto } from "./components/NuevoProducto";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // envuelve la app y permite utilizar react router dom
+    <Router>
+      <Header />
+      <div className="container">
+        {/* envuelve todas las rutas que tiene la app*/}
+        <Routes>
+          {/* Route nos permite definir las rutas, indicamos la url
+           y el componente al que hace referencia */}
+          <Route path="/" element={<Products />} />
+          <Route path="/products/nuevoproducto" element={<NuevoProducto />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
