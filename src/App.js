@@ -15,7 +15,8 @@ function App() {
         {/* envuelve todas las rutas que tiene la app*/}
         <Routes>
           {/* Route nos permite definir las rutas, indicamos la url
-           y el componente al que hace referencia */}
+           y el componente al que hace referencia - especie de switch
+           solo podemos tener una ruta activa a la vez*/}
           <Route path="/" element={<Products />} />
           <Route path="/products/nuevoproducto" element={<NuevoProducto />} />
         </Routes>
