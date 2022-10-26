@@ -12,7 +12,7 @@ const Header = () => {
               Redux
             </Link>
           </h1>
-          <Link to="/products/nuevoproducto" className="btn btn-danger d-block">
+          <Link to="/products/nuevoproducto" className="btn btn-warning d-block">
             Agregar elemento
           </Link>
         </div>
