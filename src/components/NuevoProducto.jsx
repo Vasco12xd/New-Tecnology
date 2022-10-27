@@ -1,45 +1,43 @@
-import {useState} from "react"
-import { useDispactch } from "react-redux"
+import { useState } from "react";
+import { useDispactch } from "react-redux";
 
 //importando acciones redux
-import { crearNuevoProductoAction } from "../actions/productosAction"
-import { AGREGAR_PRODUCTO } from "../types"
+import { crearNuevoProductoAction } from "../actions/productosAction";
+import { AGREGAR_PRODUCTO } from "../types";
 
 const NuevoProducto = () => {
+  const [nombre, setNombre] = useState("");
+  const [precio, setPrecio] = useState(0);
 
-    const [nombre,  setNombre] = useState('')
-    const [precio,  setPrecio] = useState(0)
+  //dispatch permite ejecutar una acción
+  const dispatch = useDispactch();
 
-    //dispatch permite ejecutar una acción
-    const dispatch = useDispactch();
-
-    //Función que llama la accion y la ejecuta
-    const agregarProducto = (producto) => 
+  //Función que llama la accion y la ejecuta
+  const agregarProducto = (producto) =>
     dispatch(crearNuevoProductoAction(producto));
 
+  const FuncionCambioPrecio = (e) => {
+    setPrecio(e.target.value);
+  };
 
-    const FuncionCambioPrecio = e => {
-        setPrecio(e.target.value)
+  const submitProduct = (e) => {
+    e.preventDefault();
+
+    //Trim elimina espacios en blanco adelante y atrás
+    if (nombre.trim() === "" || precio <= 0) {
+      const res = {
+        msg: "Ambos campos son obligatorios",
+        status: "400",
+      };
+      return alert(res.msg);
     }
 
-    const submitProduct = (e) => {
-        e.preventDefault()
-
-        //Trim elimina espacios en blanco adelante y atrás
-        if(nombre.trim() === '' || precio <= 0) {
-            const res = {
-              msg: 'Ambos campos son obligatorios',
-              status: "400",
-            };
-            return alert(res.msg)
-        }
-
-        //Creando nuevo producto
-        agregarProducto({
-            nombre,
-            precio
-        })
-    };
+    //Creando nuevo producto
+    agregarProducto({
+      nombre,
+      precio,
+    });
+  };
 
   return (
     <div className="row justify-content-center">
@@ -84,6 +82,6 @@ const NuevoProducto = () => {
       </div>
     </div>
   );
-}
+};
 
-export {NuevoProducto};
+export { NuevoProducto };

@@ -1,9 +1,8 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 //Link evita que cargue cuando le damos atrás
 
 const Header = () => {
   return (
-    
     <header>
       <nav className="navbar navbar-expand-lg justify-content-between mb-5">
         <div className="container">
@@ -12,7 +11,10 @@ const Header = () => {
               Redux
             </Link>
           </h1>
-          <Link to="/products/nuevoproducto" className="btn btn-warning d-block">
+          <Link
+            to="/products/nuevoproducto"
+            className="btn btn-warning d-block"
+          >
             Agregar elemento
           </Link>
         </div>
@@ -21,4 +23,4 @@ const Header = () => {
   );
 };
 
-export {Header};
+export { Header };
