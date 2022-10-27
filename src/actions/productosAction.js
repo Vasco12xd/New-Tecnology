@@ -2,6 +2,8 @@
 // y se disparan con un dispatch hacia el reducer 
 
 import { AGREGAR_PRODUCTO } from "../types";
+import {AGREGAR_PRODUCTO_EXITO} from "../types";
+import {AGREGAR_PRODUCTO_ERROR} from "../types";
 
 import axios from "axios";
 
@@ -12,11 +14,22 @@ import axios from "axios";
 
 // Action para crear nuevos productos
 export const crearNuevoProductoAction = (producto) => {
-    return (dispatch) => {
+    return async(dispatch) => {
         //dispatch ejecuta las acciones hacía el reducer
         dispatch(agregarProducto());
+        try{
+        
+            await axios.post("http://localhost:4000/productos", producto);
+            
+            dispatch(agregarProductoExito(producto));
+            
+        }catch (error){
+            dispatch(agregarProductoError(true));
+        }
+
+        }
     };
-};
+
 
 //Funcion para enviar el type y el payload para actualizar el loading dentro del reducer
 const agregarProducto = () => ({
@@ -24,3 +37,13 @@ const agregarProducto = () => ({
     payload: true
 });
 
+const agregarProductoExito = (producto) => ({
+    type: AGREGAR_PRODUCTO_EXITO,
+    payload: producto
+});
+
+//Funcion que envia el type al payload que envia el error al store
+const agregarProductoError = (stateError) => ({
+    type: AGREGAR_PRODUCTO_ERROR,
+    payload: stateError
+});

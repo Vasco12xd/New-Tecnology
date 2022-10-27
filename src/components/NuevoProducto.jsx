@@ -1,9 +1,22 @@
 import {useState} from "react"
+import { useDispactch } from "react-redux"
+
+//importando acciones redux
+import { crearNuevoProductoAction } from "../actions/productosAction"
+import { AGREGAR_PRODUCTO } from "../types"
 
 const NuevoProducto = () => {
 
     const [nombre,  setNombre] = useState('')
     const [precio,  setPrecio] = useState(0)
+
+    //dispatch permite ejecutar una acción
+    const dispatch = useDispactch();
+
+    //Función que llama la accion y la ejecuta
+    const agregarProducto = (producto) => 
+    dispatch(crearNuevoProductoAction(producto));
+
 
     const FuncionCambioPrecio = e => {
         setPrecio(e.target.value)
@@ -20,6 +33,12 @@ const NuevoProducto = () => {
             };
             return alert(res.msg)
         }
+
+        //Creando nuevo producto
+        agregarProducto({
+            nombre,
+            precio
+        })
     };
 
   return (
