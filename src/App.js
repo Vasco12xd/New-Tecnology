@@ -6,11 +6,17 @@ import {Routes, Route, BrowserRouter as Router} from "react-router-dom";
 import { NuevoProducto } from "./components/NuevoProducto";
 import { EditarProducto } from "./components/EditarProducto";
 
+//Redux
+import { Provider } from "react-redux"; 
+
+//Store
+import {store} from "./store";
 
 function App() {
   return (
     // envuelve la app y permite utilizar react router dom
     <Router>
+      <Provider store={store}>
       <Header />
       <div className="container">
         {/* envuelve todas las rutas que tiene la app*/}
@@ -23,6 +29,7 @@ function App() {
           <Route path="/products/editarproducto/:id" element={<EditarProducto />} />
         </Routes>
       </div>
+      </Provider>
     </Router>
   );
 }
