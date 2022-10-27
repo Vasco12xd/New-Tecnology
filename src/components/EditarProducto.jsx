@@ -1,35 +1,39 @@
-import {useState} from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const NuevoProducto = () => {
+const EditarProducto = () => {
+  const [producto, setProducto] = useState({
+    nombre: "",
+    precio: 0,
+  });
 
-    const [nombre,  setNombre] = useState('')
-    const [precio,  setPrecio] = useState(0)
+  //Instanciando useNavigate para redireccionar a la página principal
+  const navigate = useNavigate();
 
-    const FuncionCambioPrecio = e => {
-        setPrecio(e.target.value)
-    }
+  //Funcion que actualiza el state
+  const actualizarState = (e) => {
+    setProducto({
+      ...producto,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    const submitProduct = (e) => {
-        e.preventDefault()
+  const { nombre, precio } = producto;
 
-        //Trim elimina espacios en blanco adelante y atrás
-        if(nombre.trim() === '' || precio <= 0) {
-            const res = {
-              msg: 'Ambos campos son obligatorios',
-              status: "400",
-            };
-            return alert(res.msg)
-        }
-    };
+  //Funcion que ejecuta al enviar el formulario
+  const submitProductoEditar = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
 
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
         <div className="card">
           <div className="card-body">
-            <h2 className="text-center mb-4">Agregar nuevo elemento</h2>
+            <h2 className="text-center mb-4">Editar elemento</h2>
 
-            <form>
+            <form onSubmit={submitProductoEditar}>
               <div className="form-group">
                 <label>Nombre</label>
                 <input
@@ -38,7 +42,7 @@ const NuevoProducto = () => {
                   placeholder="Nombre producto"
                   name="nombre"
                   value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  onChange={actualizarState}
                 />
               </div>
               <div>
@@ -49,15 +53,15 @@ const NuevoProducto = () => {
                   placeholder="Nombre producto"
                   name="precio"
                   value={precio}
-                  onChange={FuncionCambioPrecio}
+                  onChange={actualizarState}
                 />
               </div>
               <button
                 type="submit"
                 className="btn btn-primary font-weight-bold text-uppercase d-block w-100 mt-3 "
-                onClick={submitProduct}
+                onClick={""}
               >
-                Agregar
+                Editar
               </button>
             </form>
           </div>
@@ -65,6 +69,6 @@ const NuevoProducto = () => {
       </div>
     </div>
   );
-}
+};
 
-export {NuevoProducto};
+export { EditarProducto };

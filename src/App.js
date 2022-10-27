@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { Products } from "./components/Products";
 import {Routes, Route, BrowserRouter as Router} from "react-router-dom";
 import { NuevoProducto } from "./components/NuevoProducto";
+import { EditarProducto } from "./components/EditarProducto";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
            solo podemos tener una ruta activa a la vez*/}
           <Route path="/" element={<Products />} />
           <Route path="/products/nuevoproducto" element={<NuevoProducto />} />
+          <Route path="/products/editarproducto/:id" element={<EditarProducto />} />
         </Routes>
       </div>
     </Router>
